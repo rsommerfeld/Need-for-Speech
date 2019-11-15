@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
+
+using Pitch;
 
 [RequireComponent(typeof(AudioSource))]
 public class AudioInput : MonoBehaviour
@@ -13,6 +16,10 @@ public class AudioInput : MonoBehaviour
     private float oldVolume = 0;
     public float Smoothness = 0.01f;
 
+    private Thread t;
+    private bool isRunning = false;
+
+    private float pitch;
 
     //Script MicrophoneInput
     void Start()
@@ -36,54 +43,33 @@ public class AudioInput : MonoBehaviour
         float[] data = new float[128];
         float fundamentalFrequency = 0.0f;
 
-        Debug.Log(data);
-        aud.GetSpectrumData(data, 0, FFTWindow.BlackmanHarris);
-
-        float s = 0.0f;
-        int i = 0;
-        float sum = 0;
-        for (int j = 0; j < 128; j++)
+        if (!isRunning)
         {
-            if (s < data[j])
+            if (t != null)
             {
-                s = data[j];
-                i = j;
+                t.Join();
+                Debug.Log(pitch);
             }
-
+            t = new Thread(new ThreadStart(GetPitchInThread));
+            t.Start();
         }
-        fundamentalFrequency = i * 22100 / 128;
-        float Volume = 15 * LevelMax();
-        float zcord = (fundamentalFrequency - 500) / 500;
-        if (zcord > 1) zcord = 1;
 
-        if (oldFreq < zcord) oldFreq = oldFreq + Smoothness;
-        else oldFreq = oldFreq - Smoothness;
+        // Debug.Log(pitchTracker.CurrentPitchRecord.Pitch);
 
-        if (oldVolume < zcord) oldVolume = oldVolume + Smoothness;
-        else oldVolume = oldVolume - Smoothness;
-
-        Grafik.transform.SetPositionAndRotation(new Vector3(0, oldFreq * 10, (2 * Volume - 10)), Grafik.transform.rotation);
-        Debug.Log(fundamentalFrequency + " ; " + Volume);
+        //Grafik.transform.SetPositionAndRotation(new Vector3(0, oldFreq * 10, 0), Grafik.transform.rotation);
     }
 
-    float LevelMax()
+    void GetPitchInThread()
     {
-        AudioClip _clipRecord = new AudioClip();
-        _clipRecord = aud.clip;
-        float LevelMax = 0;
-        float[] waveData = new float[128];
-        int micPosition = Microphone.GetPosition(null) - (128 + 1);
-        if (micPosition < 0) return 0;
-        _clipRecord.GetData(waveData, micPosition);
-        for (int i = 0; i < 128; i++)
-        {
-            float wavePeak = waveData[i] * waveData[i];
-            if (LevelMax < wavePeak)
-            {
-                LevelMax = wavePeak;
-            }
-        }
-        return Mathf.Sqrt(Mathf.Sqrt(LevelMax));
+        isRunning = true;
+        float[] buffer = new float[256];
+        aud.GetOutputData(buffer, 0);
 
+        PitchTracker pitchTracker = new PitchTracker();
+        pitchTracker.SampleRate = 44100;
+        pitchTracker.ProcessBuffer(buffer);
+        pitch = pitchTracker.CurrentPitchRecord.Pitch;
+        Thread.Sleep(10);
+        isRunning = false;
     }
 }
