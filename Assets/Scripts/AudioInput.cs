@@ -35,6 +35,8 @@ public class AudioInput : MonoBehaviour
         //aud.clip = Microphone.Start(Microphone.devices[0], false, 1, 44100);
         float[] data = new float[128];
         float fundamentalFrequency = 0.0f;
+
+        Debug.Log(data);
         aud.GetSpectrumData(data, 0, FFTWindow.BlackmanHarris);
 
         float s = 0.0f;
