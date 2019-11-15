@@ -16,13 +16,10 @@ public class Audioskript : MonoBehaviour {
     //Script MicrophoneInput
     void Start()
     {
-        Debug.Log("Start");
         aud = GetComponent<AudioSource>();
-        aud.clip = Microphone.Start(Microphone.devices[0], true, 1, 22050);
+        aud.clip = Microphone.Start(Microphone.devices[0], true, 1, 22050);     //aud enthält jeweils 1 Sekunde von Audioaufnahme
         aud.loop = true;
-        Debug.Log("Vor");
         while (!(Microphone.GetPosition(null) > 0)) { }
-        Debug.Log("Nach");
         aud.Play();
 
         //aud.Stop();
@@ -39,7 +36,7 @@ public class Audioskript : MonoBehaviour {
         float s = 0.0f;
         int i = 0;
         float sum = 0;
-        for (int j = 0; j < 128; j++)
+        for (int j = 0; j < 128; j++)   //bestimmt den höchsten Wert im Array
         {
             if (s < data[j])
             {
@@ -48,7 +45,7 @@ public class Audioskript : MonoBehaviour {
             }
 
         }
-        fundamentalFrequency = i * 22100 / 128;
+        fundamentalFrequency = i * 22100 / 128;         //fundamentalFrequency enthält die aktuelle Frequenz.
         float Volume = 15 * LevelMax();
         float zcord = (fundamentalFrequency-500) / 500;
         if (zcord > 1) zcord = 1;
@@ -63,6 +60,8 @@ public class Audioskript : MonoBehaviour {
         Debug.Log(fundamentalFrequency + " ; "+Volume); 
     }
 
+
+    //Bestimmt die Lautstärke des Intervalls (als return)
     float LevelMax()
     {
         AudioClip _clipRecord = new AudioClip();
