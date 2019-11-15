@@ -17,13 +17,13 @@ public class AudioInput : MonoBehaviour
     //Script MicrophoneInput
     void Start()
     {
-        Debug.Log("Start");
+        //Debug.Log("Start");
         aud = GetComponent<AudioSource>();
         aud.clip = Microphone.Start(Microphone.devices[0], true, 1, 22050);
         aud.loop = true;
-        Debug.Log("Vor");
+        //Debug.Log("Vor");
         while (!(Microphone.GetPosition(null) > 0)) { }
-        Debug.Log("Nach");
+        //Debug.Log("Nach");
         aud.Play();
 
         //aud.Stop();
@@ -36,7 +36,7 @@ public class AudioInput : MonoBehaviour
         float[] data = new float[128];
         float fundamentalFrequency = 0.0f;
 
-        Debug.Log(data);
+        //Debug.Log(data);
         aud.GetSpectrumData(data, 0, FFTWindow.BlackmanHarris);
 
         float s = 0.0f;
@@ -63,7 +63,7 @@ public class AudioInput : MonoBehaviour
         else oldVolume = oldVolume - Smoothness;
 
         Grafik.transform.SetPositionAndRotation(new Vector3(0, oldFreq * 10, (2 * Volume - 10)), Grafik.transform.rotation);
-        Debug.Log(fundamentalFrequency + " ; " + Volume);
+        //Debug.Log(fundamentalFrequency + " ; " + Volume);
     }
 
     float LevelMax()
