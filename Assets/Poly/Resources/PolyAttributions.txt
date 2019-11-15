@@ -1,0 +1,19 @@
+This project uses the following items from Poly (http://poly.google.com):
+
+Title: Car
+Author: Paul
+URL: https://poly.google.com/view/7urtiLPwvGl
+License: Creative Commons CC-BY
+https://creativecommons.org/licenses/by/3.0/legalcode
+
+Title: Schnabeltier
+Author: Paul
+URL: https://poly.google.com/view/eCVkede2AWS
+License: Creative Commons CC-BY
+https://creativecommons.org/licenses/by/3.0/legalcode
+
+Title: Tesla
+Author: Paul
+URL: https://poly.google.com/view/5rk-CWmH7rb
+License: Creative Commons CC-BY
+https://creativecommons.org/licenses/by/3.0/legalcode
