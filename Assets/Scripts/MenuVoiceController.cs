@@ -21,7 +21,7 @@ public class MenuVoiceController : MonoBehaviour {
     {
         int c = gameObject.GetComponentsInChildren<Transform>().Length-2;
         //Debug.Log("c "+c);
-        float dist = 3f / c;
+        float dist = 2.5f / c;
         //Debug.Log("dist " + dist);
         int val = (int)( (ai.volume+1)/dist );
         switch (val)
