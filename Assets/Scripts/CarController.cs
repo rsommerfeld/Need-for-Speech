@@ -7,6 +7,7 @@ public class CarController : MonoBehaviour {
 
     public AudioInput audioInput;
     public GameObject startPoint;
+    public bool freeze = false;
     
     public float steeringSensitivity = .9f;
     public float maxSteeringAngle = 30;
@@ -40,6 +41,7 @@ public class CarController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+        if (freeze) return;
         float hAxis = useMic ? audioInput.frequency : Input.GetAxis("Horizontal");
         float vAxis = useMic ? audioInput.volume : Input.GetAxis("Vertical");
 
