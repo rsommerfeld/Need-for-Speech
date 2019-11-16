@@ -29,7 +29,7 @@ public class AudioInput : MonoBehaviour
         aud.clip = Microphone.Start(Microphone.devices[0], true, 1, 22050);
         aud.loop = true;
         Debug.Log("Vor");
-        while (!(Microphone.GetPosition(null) > 0)) { }
+       // while (!(Microphone.GetPosition(Microphone.devices[0]) > 0)) { }
         Debug.Log("Nach");
         aud.Play();
 
@@ -50,7 +50,9 @@ public class AudioInput : MonoBehaviour
                 t.Join();
                 Debug.Log(pitch);
             }
-            t = new Thread(new ThreadStart(GetPitchInThread));
+            float[] buffer = new float[256];
+            aud.GetOutputData(buffer, 0);
+            t = new Thread(() => GetPitchInThread(buffer));
             t.Start();
         }
 
@@ -59,11 +61,9 @@ public class AudioInput : MonoBehaviour
         //Grafik.transform.SetPositionAndRotation(new Vector3(0, oldFreq * 10, 0), Grafik.transform.rotation);
     }
 
-    void GetPitchInThread()
+    void GetPitchInThread(float[] buffer)
     {
         isRunning = true;
-        float[] buffer = new float[256];
-        aud.GetOutputData(buffer, 0);
 
         PitchTracker pitchTracker = new PitchTracker();
         pitchTracker.SampleRate = 44100;
