@@ -20,8 +20,15 @@ public class AudioPropertyViewer : MonoBehaviour {
 	void Update ()
     {
         if (volume)
+        {
+            Debug.Log("Volume: " + ai.volume.ToString());
             GetComponent<Text>().text = "Volume: " + ai.volume.ToString();
+        }
         else
+        {
+            Debug.Log("Pitch: " + ai.frequency.ToString());
             GetComponent<Text>().text = "Pitch: " + ai.frequency.ToString();
+        }
     }
+
 }
