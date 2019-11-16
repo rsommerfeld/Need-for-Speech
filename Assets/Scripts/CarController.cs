@@ -11,6 +11,9 @@ public class CarController : MonoBehaviour {
     public float maxSteeringAngle = 30;
     [Range(0, 1)]
     public float steeringSpringTension = .4f;
+    private Vector3 originalPos;
+    private Vector3 originalRot;
+
 
     [Range(0, 1)]
     public float friction = .3f;
@@ -22,8 +25,10 @@ public class CarController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        rb = GetComponent<Rigidbody>();	
-	}
+        rb = GetComponent<Rigidbody>();
+        originalPos = transform.position;
+        originalRot = transform.eulerAngles;
+    }
 	
     public float getSpeed()
     {
@@ -44,4 +49,10 @@ public class CarController : MonoBehaviour {
         transform.position += transform.forward * Time.deltaTime * speed;
         transform.Rotate(new Vector3(0, steeringAngle , 0));
 	}
+
+    public void Reset()
+    {
+        transform.position = originalPos;
+        transform.eulerAngles = originalRot;
+    }
 }
