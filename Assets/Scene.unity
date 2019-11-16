@@ -828,8 +828,8 @@ MonoBehaviour:
   objectToFollow: {fileID: 617359201}
   offset: 13.5
   height: 2.5
-  interpolationMultiplier: 1
-  minInterpolation: 0.4
+  interpolationMultiplier: 3
+  minInterpolation: 0.9
 --- !u!1 &474539854
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,10 +941,6 @@ MonoBehaviour:
   Smoothness: 0.01
   volume: 0
   frequency: 0
-  volumeOrigin: 0
-  frequencyOrigin: 0
-  volumeScale: 1
-  frequencyScale: 1
 --- !u!4 &474539857
 Transform:
   m_ObjectHideFlags: 0
@@ -1056,6 +1052,21 @@ Prefab:
       propertyPath: audioInput
       value: 
       objectReference: {fileID: 474539856}
+    - target: {fileID: 114476056825123966, guid: e10debfd544ce524ea2e57ec20166b7b,
+        type: 2}
+      propertyPath: useMic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114476056825123966, guid: e10debfd544ce524ea2e57ec20166b7b,
+        type: 2}
+      propertyPath: acceleration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114476056825123966, guid: e10debfd544ce524ea2e57ec20166b7b,
+        type: 2}
+      propertyPath: friction
+      value: 0.02
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e10debfd544ce524ea2e57ec20166b7b, type: 2}
   m_IsPrefabParent: 0
