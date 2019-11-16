@@ -6,6 +6,7 @@ public class CarController : MonoBehaviour {
     private Rigidbody rb;
 
     public AudioInput audioInput;
+    public GameObject startPoint;
     
     public float steeringSensitivity = .9f;
     public float maxSteeringAngle = 30;
@@ -54,16 +55,15 @@ public class CarController : MonoBehaviour {
 
     public void Reset()
     {
-        GameObject respawnPoint = GameObject.Find("StartPoint");
-        if (respawnPoint == null)
+        if (!startPoint)
         {
             transform.position = originalPos;
             transform.eulerAngles = originalRot;
         }
         else
         {
-            transform.position = respawnPoint.transform.position;
-            transform.rotation = respawnPoint.transform.rotation;
+            transform.position = startPoint.transform.position;
+            transform.rotation = startPoint.transform.rotation;
         }
     }
 }
