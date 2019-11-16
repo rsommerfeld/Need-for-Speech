@@ -54,7 +54,17 @@ public class CarController : MonoBehaviour {
 
     public void Reset()
     {
-        transform.position = originalPos;
-        transform.eulerAngles = originalRot;
+        GameObject respawnPoint = GameObject.Find("StartPoint");
+        if (respawnPoint == null)
+        {
+            transform.position = originalPos;
+            transform.eulerAngles = originalRot;
+        }
+        else
+        {
+            transform.position = respawnPoint.transform.position;
+            transform.rotation = respawnPoint.transform.rotation;
+        }
     }
 }
+    
