@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +20,12 @@ public class TimeController : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public string getTimeString()
+    {
+        TimeSpan timeSpan = TimeSpan.FromSeconds(getTime());
+        return string.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
+    }
 
     public float getTime()
     {
