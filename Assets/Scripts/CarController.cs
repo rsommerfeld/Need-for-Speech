@@ -4,9 +4,20 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour {
     private Rigidbody rb;
+    
+    public float steeringSensitivity = .9f;
+    public float maxSteeringAngle = 30;
+    [Range(0, 1)]
+    public float steeringSpringTension = .4f;
 
-    public float speedMultiplier = 10;
-    public float steeringSensitivity = 1;
+    [Range(0, 1)]
+    public float friction = .3f;
+    public float acceleration = 1;
+    public float maxSpeed = 30;
+
+
+    private float steeringAngle = 0;
+    private float speed = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -16,9 +27,15 @@ public class CarController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         float hAxis = Input.GetAxis("Horizontal");
-        float speed = Input.GetAxis("Vertical");
+        float vAxis = Input.GetAxis("Vertical");
 
-        transform.position += transform.forward * Time.deltaTime * speed * speedMultiplier;
-        transform.Rotate(new Vector3(0, hAxis * steeringSensitivity, 0));
+        steeringAngle += (1 - (Mathf.Abs(steeringAngle) / maxSteeringAngle)) * hAxis * steeringSensitivity;
+        steeringAngle *= 1 - steeringSpringTension;
+
+        speed += (1-(Mathf.Abs(speed) / maxSpeed)) * acceleration * vAxis;
+        speed *= 1-friction;
+
+        transform.position += transform.forward * Time.deltaTime * speed;
+        transform.Rotate(new Vector3(0, steeringAngle , 0));
 	}
 }
