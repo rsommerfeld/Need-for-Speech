@@ -372,7 +372,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ddca1780436be4a9cb6e4ff170e7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultcolor: {r: 1, g: 1, b: 1, a: 1}
   highlightcolor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!65 &328983815
 BoxCollider:
@@ -457,6 +456,9 @@ MonoBehaviour:
   position: {x: 0, y: -0.5, z: 0}
   rotation: {x: 0, y: 90, z: 0}
   scale: {x: 1, y: 1, z: 1}
+  btn2: {fileID: 341200568}
+  btn3: {fileID: 388346373}
+  menuControler: {fileID: 42946145}
 --- !u!1 &341200567
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,7 +558,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ddca1780436be4a9cb6e4ff170e7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultcolor: {r: 1, g: 1, b: 1, a: 1}
   highlightcolor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!65 &341200572
 BoxCollider:
@@ -586,6 +587,9 @@ MonoBehaviour:
   position: {x: -0.16, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0}
   scale: {x: 3, y: 3, z: 3}
+  btn2: {fileID: 328983813}
+  btn3: {fileID: 388346373}
+  menuControler: {fileID: 42946145}
 --- !u!1 &388346372
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,6 +639,9 @@ MonoBehaviour:
   position: {x: 0, y: -1.5, z: 0}
   rotation: {x: 0, y: -135, z: 0}
   scale: {x: 7, y: 7, z: 7}
+  btn2: {fileID: 341200568}
+  btn3: {fileID: 328983813}
+  menuControler: {fileID: 42946145}
 --- !u!114 &388346375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -646,7 +653,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ddca1780436be4a9cb6e4ff170e7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultcolor: {r: 1, g: 1, b: 1, a: 1}
   highlightcolor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!65 &388346376
 BoxCollider:
@@ -2050,6 +2056,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1375865256}
+  - component: {fileID: 1375865257}
   m_Layer: 0
   m_Name: Menu
   m_TagString: Untagged
@@ -2073,6 +2080,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1375865257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1375865255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8129d3f774b1c344f9693dfece202408, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioController: {fileID: 474539854}
+  btn1: {fileID: 341200568}
+  btn2: {fileID: 328983813}
+  btn3: {fileID: 388346373}
 --- !u!1 &1397391906
 GameObject:
   m_ObjectHideFlags: 0
@@ -2348,13 +2370,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1693465672}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.2, y: 6.843498, z: -27.2}
+  m_LocalRotation: {x: 0, y: -0.38268343, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 14, y: 6, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 22
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -45, z: 0}
 --- !u!1001 &1986108906
 Prefab:
   m_ObjectHideFlags: 0
