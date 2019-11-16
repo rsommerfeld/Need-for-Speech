@@ -38,6 +38,7 @@ public class AudioInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("delta"+ Time.deltaTime);
         //aud.clip = Microphone.Start(Microphone.devices[0], false, 1, 44100);
         float[] data = new float[128];
         float fundamentalFrequency = 0.0f;
@@ -68,22 +69,35 @@ public class AudioInput : MonoBehaviour
         if (oldVolume < zcord) oldVolume = oldVolume + Smoothness;
         else oldVolume = oldVolume - Smoothness;
 
-        /*this.frequency = oldFreq;
-        this.volume = (2 * Volume - 10)/10;*/
+        var freq = oldFreq;
+        var vol = (2 * Volume - 10) / 10;
+        //this.frequency = oldFreq;
+        //this.volume = (2 * Volume - 10) / 10;
 
         float curTime = Time.time;
-        volBuffer.Enqueue(volume);
+        volBuffer.Enqueue(vol);
+        freqBuffer.Enqueue(freq);
         timeBuffer.Enqueue(curTime);
 
         float volsum = 0;
-        foreach (float vol in volBuffer)
+        foreach (float v in volBuffer)
         {
-            volsum += vol;
+            volsum += v;
         }
+        float freqsum = 0;
+        foreach (float v in freqBuffer)
+        {
+            freqsum += v;
+        }
+        /*Debug.Log("cnt: " + volBuffer.Count);
+        Debug.Log("timeheaddelta: " + (curTime-timeBuffer.Peek()));*/
         this.volume = volsum / volBuffer.Count;
-        while (timeBuffer.Peek() + 0.2 > curTime)
+        this.frequency = freqsum / freqBuffer.Count;
+        while (timeBuffer.Count > 0 && (curTime - timeBuffer.Peek()) > 0.2)
         {
             timeBuffer.Dequeue();
+            volBuffer.Dequeue();
+            freqBuffer.Dequeue();
         }
 
     }
