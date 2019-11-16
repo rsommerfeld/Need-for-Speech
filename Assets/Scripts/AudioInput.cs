@@ -19,6 +19,10 @@ public class AudioInput : MonoBehaviour
     private Queue<float> volBuffer = new Queue<float>();
     private Queue<float> timeBuffer = new Queue<float>();
 
+    public float minfreq = -0.35f, avgfreq = 0.0f, maxfreq = 0.35f;
+    //public float minfreq = -0.6f, avgfreq = -0.3f, maxfreq = 0f;
+    //public float minfreq = -0.6f, avgfreq = 42f, maxfreq = -0.5f;
+
 
     //Script MicrophoneInput
     void Start()
@@ -38,7 +42,6 @@ public class AudioInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("delta"+ Time.deltaTime);
         //aud.clip = Microphone.Start(Microphone.devices[0], false, 1, 44100);
         float[] data = new float[128];
         float fundamentalFrequency = 0.0f;
@@ -92,8 +95,32 @@ public class AudioInput : MonoBehaviour
         /*Debug.Log("cnt: " + volBuffer.Count);
         Debug.Log("timeheaddelta: " + (curTime-timeBuffer.Peek()));*/
         this.volume = volsum / volBuffer.Count;
-        this.frequency = freqsum / freqBuffer.Count;
-        while (timeBuffer.Count > 0 && (curTime - timeBuffer.Peek()) > 0.2)
+        this.frequency = (freqsum / freqBuffer.Count);
+        if (this.frequency > this.avgfreq)
+        {
+            this.frequency = 1 - Mathf.Max(0, this.maxfreq - this.frequency) / (this.maxfreq - this.avgfreq);
+        }
+        else
+        {
+            this.frequency = Mathf.Max(this.minfreq, -this.avgfreq + this.frequency) / (this.avgfreq - this.minfreq);
+        }
+        /*Debug.Log("origfreq "+this.frequency);
+        if(this.frequency < this.minfreq)
+        {
+            this.frequency = -1;
+        } else if (this.frequency > this.maxfreq)
+        {
+            this.frequency = 1;
+        } else
+        {
+            this.frequency = 0;
+        }*/
+        if (this.volume < 0)
+        {
+            //this.volume = 
+            this.frequency = 0;
+        }
+        while (timeBuffer.Count > 0 && (curTime - timeBuffer.Peek()) > 0.1)
         {
             timeBuffer.Dequeue();
             volBuffer.Dequeue();
