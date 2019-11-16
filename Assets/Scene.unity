@@ -969,6 +969,9 @@ MonoBehaviour:
   Smoothness: 0.01
   volume: 0
   frequency: 0
+  minfreq: -0.35
+  avgfreq: 0
+  maxfreq: 0.35
 --- !u!4 &474539857
 Transform:
   m_ObjectHideFlags: 0
@@ -1835,7 +1838,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1549138807
 Transform:
   m_ObjectHideFlags: 0
