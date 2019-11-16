@@ -24,6 +24,11 @@ public class CarController : MonoBehaviour {
         rb = GetComponent<Rigidbody>();	
 	}
 	
+    public float getSpeed()
+    {
+        return speed;
+    }
+
 	// Update is called once per frame
 	void Update () {
         float hAxis = Input.GetAxis("Horizontal");
