@@ -23,6 +23,8 @@ public class CarController : MonoBehaviour {
     private float steeringAngle = 0;
     private float speed = 0;
 
+    public bool useMic = true;
+
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody>();
@@ -37,8 +39,8 @@ public class CarController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        float hAxis = audioInput.frequency;
-        float vAxis = audioInput.volume;
+        float hAxis = useMic ? audioInput.frequency : Input.GetAxis("Horizontal");
+        float vAxis = useMic ? audioInput.volume : Input.GetAxis("Vertical");
 
         steeringAngle += (1 - (Mathf.Abs(steeringAngle) / maxSteeringAngle)) * hAxis * steeringSensitivity;
         steeringAngle *= 1 - steeringSpringTension;
