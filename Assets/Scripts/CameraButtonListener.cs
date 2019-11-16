@@ -4,22 +4,35 @@ using UnityEngine;
 
 public class CameraButtonListener : MonoBehaviour {
 
-    public Camera menuCamera, mainCamera;
+    public GameObject car, menu, mainCamera;
+
+    public bool inMenu = true;
+    private CameraController cameraController;
+
+    public void Start()
+    {
+        cameraController = mainCamera.GetComponent<CameraController>();
+        updateCamera();
+
+    }
+
+    private void updateCamera() {
+        if (inMenu)
+        {
+            cameraController.objectToFollow = menu;
+        }
+        else
+        {
+            cameraController.objectToFollow = car;
+        }
+    }
 
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (this.menuCamera.enabled)
-            {
-                this.menuCamera.enabled = false;
-                this.mainCamera.enabled = true;
-            }
-            else
-            {
-                this.menuCamera.enabled = true;
-                this.mainCamera.enabled = false;
-            }
+            inMenu = !inMenu;
+            updateCamera();
         }
     }
 }
