@@ -5,13 +5,15 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class AudioInput : MonoBehaviour
 {
-    public GameObject Grafik;
+    //public GameObject Grafik;
     private float[] data = new float[128];
     private AudioSource aud;
     private bool Run = false;
     private float oldFreq = 0;
     private float oldVolume = 0;
     public float Smoothness = 0.01f;
+
+    public float volume = 0, frequency = 0;
 
 
     //Script MicrophoneInput
@@ -62,7 +64,9 @@ public class AudioInput : MonoBehaviour
         if (oldVolume < zcord) oldVolume = oldVolume + Smoothness;
         else oldVolume = oldVolume - Smoothness;
 
-        Grafik.transform.SetPositionAndRotation(new Vector3(0, oldFreq * 10, (2 * Volume - 10)), Grafik.transform.rotation);
+        //Grafik.transform.SetPositionAndRotation(new Vector3(0, oldFreq * 10, (2 * Volume - 10)), Grafik.transform.rotation);
+        this.frequency = oldFreq;
+        this.volume = (2 * Volume - 10)/10;
         //Debug.Log(fundamentalFrequency + " ; " + Volume);
     }
 
