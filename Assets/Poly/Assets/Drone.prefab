@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4141297724479884}
   - component: {fileID: 114192572969037778}
   m_Layer: 0
-  m_Name: _Untitled__Paul_9WWHd7WGk_w
+  m_Name: Drone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
