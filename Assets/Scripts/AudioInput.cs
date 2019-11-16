@@ -15,8 +15,9 @@ public class AudioInput : MonoBehaviour
 
     public float volume = 0, frequency = 0;
 
-    public float volumeOrigin = 0, frequencyOrigin = 0;
-    public float volumeScale = 1, frequencyScale = 1;
+    private Queue<float> freqBuffer = new Queue<float>();
+    private Queue<float> volBuffer = new Queue<float>();
+    private Queue<float> timeBuffer = new Queue<float>();
 
 
     //Script MicrophoneInput
@@ -67,20 +68,24 @@ public class AudioInput : MonoBehaviour
         if (oldVolume < zcord) oldVolume = oldVolume + Smoothness;
         else oldVolume = oldVolume - Smoothness;
 
-        //Grafik.transform.SetPositionAndRotation(new Vector3(0, oldFreq * 10, (2 * Volume - 10)), Grafik.transform.rotation);
-        this.frequency = oldFreq;
-        this.volume = (2 * Volume - 10)/10;
-        //Debug.Log(fundamentalFrequency + " ; " + Volume);
-    }
+        /*this.frequency = oldFreq;
+        this.volume = (2 * Volume - 10)/10;*/
 
-    public float transformedVolume()
-    {
-        return (volume + volumeOrigin) * volumeScale;
-    }
+        float curTime = Time.time;
+        volBuffer.Enqueue(volume);
+        timeBuffer.Enqueue(curTime);
 
-    public float transformedFrequency()
-    {
-        return (frequency + frequencyOrigin) * frequencyScale;
+        float volsum = 0;
+        foreach (float vol in volBuffer)
+        {
+            volsum += vol;
+        }
+        this.volume = volsum / volBuffer.Count;
+        while (timeBuffer.Peek() + 0.2 > curTime)
+        {
+            timeBuffer.Dequeue();
+        }
+
     }
 
     float LevelMax()
