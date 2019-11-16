@@ -15,6 +15,9 @@ public class AudioInput : MonoBehaviour
 
     public float volume = 0, frequency = 0;
 
+    public float volumeOrigin = 0, frequencyOrigin = 0;
+    public float volumeScale = 1, frequencyScale = 1;
+
 
     //Script MicrophoneInput
     void Start()
@@ -68,6 +71,16 @@ public class AudioInput : MonoBehaviour
         this.frequency = oldFreq;
         this.volume = (2 * Volume - 10)/10;
         //Debug.Log(fundamentalFrequency + " ; " + Volume);
+    }
+
+    public float transformedVolume()
+    {
+        return (volume + volumeOrigin) * volumeScale;
+    }
+
+    public float transformedFrequency()
+    {
+        return (frequency + frequencyOrigin) * frequencyScale;
     }
 
     float LevelMax()

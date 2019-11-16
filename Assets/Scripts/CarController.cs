@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour {
     private Rigidbody rb;
+
+    public AudioInput audioInput;
     
     public float steeringSensitivity = .9f;
     public float maxSteeringAngle = 30;
@@ -14,7 +16,6 @@ public class CarController : MonoBehaviour {
     public float friction = .3f;
     public float acceleration = 1;
     public float maxSpeed = 30;
-
 
     private float steeringAngle = 0;
     private float speed = 0;
@@ -31,8 +32,8 @@ public class CarController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        float hAxis = Input.GetAxis("Horizontal");
-        float vAxis = Input.GetAxis("Vertical");
+        float hAxis = audioInput.frequency;
+        float vAxis = audioInput.volume;
 
         steeringAngle += (1 - (Mathf.Abs(steeringAngle) / maxSteeringAngle)) * hAxis * steeringSensitivity;
         steeringAngle *= 1 - steeringSpringTension;
