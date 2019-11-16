@@ -6,7 +6,8 @@ public class CameraController : MonoBehaviour {
     public GameObject objectToFollow;
     public float offset;
     public float height;
-    public float interpolationSpeed;
+    public float interpolationMultiplier = 1;
+    public float minInterpolation = 0.4f;
 
 	// Use this for initialization
 	void Start () {
@@ -15,7 +16,9 @@ public class CameraController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void LateUpdate () {
-        float interpolation = interpolationSpeed * Time.deltaTime;
+        CarController objectToFollowScript = objectToFollow.GetComponent<CarController>();
+        float iSpeed = minInterpolation + 2*(objectToFollowScript ? Mathf.Abs(objectToFollowScript.getSpeed() / objectToFollowScript.maxSpeed) : 1);
+        float interpolation = interpolationMultiplier * Time.deltaTime * iSpeed;
 
         Vector3 angle = objectToFollow.transform.rotation.ToEulerAngles();
 
