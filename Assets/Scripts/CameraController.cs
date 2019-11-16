@@ -17,23 +17,22 @@ public class CameraController : MonoBehaviour {
 	void LateUpdate () {
         float interpolation = interpolationSpeed * Time.deltaTime;
 
-        Vector3 position = this.transform.position;
-
         Vector3 angle = objectToFollow.transform.rotation.ToEulerAngles();
 
         float newY = objectToFollow.transform.position.y + height;
-        //position.x = Mathf.Lerp(this.transform.position.x, objectToFollow.transform.position.x + offsetX, interpolation);
+
         float newX = -1 * Mathf.Sin(angle.y) * offset + objectToFollow.transform.position.x;
         float newZ = -1 * Mathf.Cos(angle.y) * offset + objectToFollow.transform.position.z;
 
-        position = new Vector3(newX, newY, newZ);
+        Vector3 position = new Vector3(newX, newY, newZ);
         
         Quaternion targetRotation = objectToFollow.transform.rotation;
         targetRotation.y = Mathf.LerpAngle(this.transform.rotation.y, targetRotation.y, interpolation);
 
 
 
-        this.transform.rotation = targetRotation;
-        this.transform.position = position;
+        //this.transform.rotation = targetRotation;
+        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, objectToFollow.transform.rotation, interpolation);
+        this.transform.position = Vector3.Lerp(this.transform.position, position, interpolation);
     }
 }
