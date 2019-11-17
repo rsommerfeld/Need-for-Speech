@@ -1054,9 +1054,9 @@ MonoBehaviour:
   Smoothness: 0.01
   volume: 0
   frequency: 0
-  minfreq: -0.4
-  avgfreq: -0.15
-  maxfreq: 0.2
+  minfreq: -0.35
+  avgfreq: 0
+  maxfreq: 0.35
 --- !u!4 &474539857
 Transform:
   m_ObjectHideFlags: 0
