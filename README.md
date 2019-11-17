@@ -10,3 +10,9 @@ The View can be switched by pressing `Esc`.
 ### Settings
 
 Pitch cannot (yet) be calibrated, but you can change it in Unity under `AudioController -> Audio Input -> Minfreq/Avgfreq/Maxfreq`
+
+### Pictures
+
+![Menu](screenshot/menu.png)
+![Gameplay](screenshot/play1.png)
+![Gameplay](screenshot/play2.png)
